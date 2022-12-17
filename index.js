@@ -171,3 +171,7 @@ function renderCities() {
     });
     
   }
+  $(document).on("click", "#listC", function() {
+    var thisCity = $(this).attr("data-city");
+    getResponseWeather(thisCity);
+  });
