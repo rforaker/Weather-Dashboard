@@ -52,3 +52,18 @@ function renderCities() {
         getResponseWeather(city)
     };
 }   
+
+  $("#add-city").on("click", function(event){
+      event.preventDefault();
+
+    var city = $("#city-input").val().trim();
+    
+
+    if (city === "") {
+        return;
+    }
+
+    cities.push(city);
+  storeCities();
+  renderCities();
+  });
