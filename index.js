@@ -4,7 +4,6 @@ var key = "65f89a7498f261c289d28f60e4152811";
 
 function FormatDay(date) {
   var date = new Date();
-  console.log(date);
   var month = date.getMonth() + 1;
   var day = date.getDate();
 
@@ -112,20 +111,6 @@ function getResponseWeather(cityName) {
       var cityUVp = $("<p>").text("UV Index: ");
       cityUVp.append(cityUV);
       $("#today-weather").append(cityUVp);
-      console.log(typeof responseuv.value);
-      if (responseuv.value > 0 && responseuv.value <= 2) {
-        cityUV.attr("class", "green");
-      } else if (responseuv.value > 2 && responseuv.value <= 5) {
-        cityUV.attr("class", "yellow");
-      } else if (responseuv.value > 5 && responseuv.value <= 7) {
-        cityUV.attr("class", "orange");
-      } else if (responseuv.value > 7 && responseuv.value <= 10) {
-        cityUV.attr("class", "red");
-      } else {
-        cityUV.attr("class", "purple");
-      }
-    });
-
     var queryURL3 =
       "https://api.openweathermap.org/data/2.5/forecast?q=" +
       cityName +
@@ -141,11 +126,9 @@ function getResponseWeather(cityName) {
         var read_date = response5day.list[i].dt;
         if (response5day.list[i].dt != response5day.list[i + 1].dt) {
           var FivedayDiv = $("<div>");
-          FivedayDiv.attr("class", "col-3 m-2 bg-primary");
           var d = new Date(0);
           d.setUTCSeconds(read_date);
           var date = d;
-          console.log(date);
           var month = date.getMonth() + 1;
           var day = date.getDate();
           var dayOutput =
@@ -157,25 +140,7 @@ function getResponseWeather(cityName) {
             (day < 10 ? "0" : "") +
             day;
           var Fivedayh4 = $("<h6>").text(dayOutput);
-          var imgtag = $("<img>");
           var skyconditions = response5day.list[i].weather[0].main;
-          if (skyconditions === "Clouds") {
-            imgtag.attr(
-              "src",
-              "https://img.icons8.com/color/48/000000/cloud.png"
-            );
-          } else if (skyconditions === "Clear") {
-            imgtag.attr(
-              "src",
-              "https://img.icons8.com/color/48/000000/summer.png"
-            );
-          } else if (skyconditions === "Rain") {
-            imgtag.attr(
-              "src",
-              "https://img.icons8.com/color/48/000000/rain.png"
-            );
-          }
-
           var pTemperatureK = response5day.list[i].main.temp;
           console.log(skyconditions);
           var TempetureToNum = parseInt((pTemperatureK * 9) / 5 - 459);
